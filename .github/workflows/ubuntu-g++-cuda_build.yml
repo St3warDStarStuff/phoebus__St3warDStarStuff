@@ -13,9 +13,7 @@ on:
 
 jobs:
   phoebus_compile_and_build:
-    strategy:
-      fail-fast: false
-    runs-on: nvidia_gpu
+    runs-on: gpu
 
     steps:
       - name: Checkout Code
