@@ -23,7 +23,13 @@ jobs:
           submodules: recursive
 
       - name: Verify nvcc installation
-        run: nvcc --version
+        run: |
+          # Add CUDA binaries and libraries to the active environment path
+          export PATH=/usr/local/cuda/bin:$PATH
+          export LD_LIBRARY_PATH=/usr/local/cuda/lib64:$LD_LIBRARY_PATH
+          
+          # Now verify it works
+          nvcc --version
 
       - name: Setup OS and compile
         uses: ./.github/actions/OS_setup
