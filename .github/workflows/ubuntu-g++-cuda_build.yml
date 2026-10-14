@@ -22,20 +22,15 @@ jobs:
           # This forces GitHub to automatically pull down parthenon, singularity-eos, and kokkos
           submodules: recursive
 
-      - name: Verify nvcc installation
-        run: |
-          # Add CUDA binaries and libraries to the active environment path
-          export PATH=/usr/local/cuda/bin:$PATH
-          export LD_LIBRARY_PATH=/usr/local/cuda/lib64:$LD_LIBRARY_PATH
-          
-          # Now verify it works
-          nvcc --version
-
       - name: Setup OS and compile
         uses: ./.github/actions/OS_setup
         with:
           compiler: 'g++'
           uses_mpi: "false"
+
+      - name: Verify nvcc installation
+        run: nvcc --version     
+
       - name: Compile and build Phoebus - cuda
         uses: ./.github/actions/compile_and_build_phoebus/cuda
         with:

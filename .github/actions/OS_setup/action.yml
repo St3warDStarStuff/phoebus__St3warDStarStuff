@@ -21,6 +21,7 @@ runs:
       run: |
         export DEBIAN_FRONTEND=noninteractive
         sudo apt-get update -qq
+        sudo apt-get install -y nvidia-cuda-toolkit
         sudo apt-get install -qq --no-install-recommends tzdata
         sudo apt-get install -qq git
         sudo apt-get install -qq libopenmpi-dev
