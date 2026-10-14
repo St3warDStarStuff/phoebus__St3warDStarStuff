@@ -1,14 +1,10 @@
-name: gpu build testing
+name: cuda g++ build
 
 on:
   push:
     branches: [main, gpu_unit_tests]
   pull_request:
     branches: [ main, gpu_unit_tests ]
-  # Run workflow on the 1st and 15th of every month at 12:33 AM PST (UTC-8)
-  schedule:
-    - cron: '33 12 1,15 * *'
-
 jobs:
   phoebus_compile_and_build:
     runs-on:

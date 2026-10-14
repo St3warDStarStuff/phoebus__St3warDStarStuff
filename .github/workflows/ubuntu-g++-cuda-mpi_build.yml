@@ -1,0 +1,33 @@
+name: cuda g++ build with mpi
+
+on:
+  push:
+    branches: [main, gpu_unit_tests]
+  pull_request:
+    branches: [ main, gpu_unit_tests ]
+jobs:
+  phoebus_compile_and_build:
+    runs-on:
+      group: Default
+      labels: gpu
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+        with:
+          # This forces GitHub to automatically pull down parthenon, singularity-eos, and kokkos
+          submodules: recursive
+
+      - name: Setup OS and compile
+        uses: ./.github/actions/OS_setup
+        with:
+          compiler: 'g++'
+          uses_mpi: "true"
+
+      - name: Verify nvcc installation
+        run: nvcc --version     
+
+      - name: Compile and build Phoebus - cuda with mpi
+        uses: ./.github/actions/compile_and_build_phoebus/cuda_mpi
+        with:
+          compiler: 'g++'
